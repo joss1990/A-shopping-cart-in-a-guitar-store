@@ -1,0 +1,227 @@
+<link rel="stylesheet" href="styles.css">
+
+
+<div>
+  <h5>Fender</h5>
+  <p>price: 5800 IL</p>
+  <img src="guitars/fender.jpg">
+  <p id='fenderCount'>0</p>
+  <button onclick="addToCart(1)">+</button>
+  <button onclick="removeFromCart(1)">-</button>
+</div>
+
+<div>
+  <h5>Gibson</h5>
+  <p>price: 10500 IL</p>
+  <img src="guitars/gibson (2).jpg">
+  <p id='gibsonCount'>0</p>
+  <button onclick="addToCart(2)">+</button>
+  <button onclick="removeFromCart(2)">-</button>
+</div>
+
+<div>
+  <h5>Manuel</h5>
+  <p>price: 4300 IL</p>
+  <img src="guitars/manuel.jpg">
+  <p id='manuelCount'>0</p>
+  <button onclick="addToCart(3)">+</button>
+  <button onclick="removeFromCart(3)">-</button>
+</div>
+
+<div>
+  <h5>Martin</h5>
+  <p>price: 6600 IL</p>
+  <img src="guitars/martin.jpg">
+  <p id='martinCount'>0</p>
+  <button onclick="addToCart(4)">+</button>
+  <button onclick="removeFromCart(4)">-</button>
+</div>
+
+
+<h1>Total products:</h1>
+<p id='totalPro'>0</p>
+
+<h1>Total price:</h1>
+<p id='sum'>0 IL</p>
+
+<div style="text-align: left;">
+  <button onclick="C()">Clear shopping cart</button>
+</div>
+
+<!-------------------------------------------------------------------->
+<script>
+  const fenderPrice = 5800;
+  const gibsonPrice = 10500;
+  const manuelPrice = 4300;
+  const martinPrice = 6600;
+  let totalPro = 0;
+  let sum = 0;
+
+
+  window.onload = function () {
+    checkCart(1);
+    checkCart(2);
+    checkCart(3);
+    checkCart(4);
+  };
+
+  function C() {
+    clearCart(1);
+    clearCart(2);
+    clearCart(3);
+    clearCart(4);
+  };
+
+  function addToCart(guitarsID) {
+    fetch('http://localhost:3000/add/' + guitarsID)
+      .then(function (response) {
+        return response.text();  // If the response is ok, return the text
+      })
+      .then(function (data) {
+        if (guitarsID == 1) {
+          document.getElementById('fenderCount').innerHTML = data;
+          sum += fenderPrice;
+          totalPro++;
+          document.getElementById('totalPro').innerHTML = totalPro;
+          document.getElementById('sum').innerHTML = sum + " IL";
+        }
+        if (guitarsID == 2) {
+          document.getElementById('gibsonCount').innerHTML = data;
+          sum += gibsonPrice;
+          totalPro++;
+          document.getElementById('totalPro').innerHTML = totalPro;
+          document.getElementById('sum').innerHTML = sum + " IL";
+        }
+        if (guitarsID == 3) {
+          document.getElementById('manuelCount').innerHTML = data;
+          sum += manuelPrice;
+          totalPro++;
+          document.getElementById('totalPro').innerHTML = totalPro;
+          document.getElementById('sum').innerHTML = sum + " IL";
+        }
+        if (guitarsID == 4) {
+          document.getElementById('martinCount').innerHTML = data;
+          sum += martinPrice;
+          totalPro++;
+          document.getElementById('totalPro').innerHTML = totalPro;
+          document.getElementById('sum').innerHTML = sum + " IL";
+        }
+      });
+  }
+
+  function removeFromCart(guitarsID) {
+    fetch('http://localhost:3000/remove/' + guitarsID)
+      .then(function (response) {
+        return response.text();  // If the response is ok, return the text
+      })
+      .then(function (data) {
+        if (guitarsID == 1) {
+          document.getElementById('fenderCount').innerHTML = data;
+          sum -= fenderPrice;
+          totalPro--;
+          document.getElementById('totalPro').innerHTML = totalPro;
+          document.getElementById('sum').innerHTML = sum + " IL";
+        }
+        if (guitarsID == 2) {
+          document.getElementById('gibsonCount').innerHTML = data;
+          sum -= gibsonPrice;
+          totalPro--;
+          document.getElementById('totalPro').innerHTML = totalPro;
+          document.getElementById('sum').innerHTML = sum + " IL";
+        }
+        if (guitarsID == 3) {
+          document.getElementById('manuelCount').innerHTML = data;
+          sum -= manuelPrice;
+          totalPro--;
+          document.getElementById('totalPro').innerHTML = totalPro;
+          document.getElementById('sum').innerHTML = sum + " IL";
+        }
+        if (guitarsID == 4) {
+          document.getElementById('martinCount').innerHTML = data;
+          sum -= martinPrice;
+          totalPro--;
+          document.getElementById('totalPro').innerHTML = totalPro;
+          document.getElementById('sum').innerHTML = sum + " IL";
+        }
+      });
+  }
+
+  function checkCart(guitarsID) {
+    fetch('http://localhost:3000/check/' + guitarsID)
+      .then(function (response) {
+        return response.text();
+      })
+      .then(function (data) {
+        if (guitarsID == 1) {
+          document.getElementById('fenderCount').innerHTML = data;
+          count1 = Number(data);
+          sum += count1 * fenderPrice;
+          totalPro += count1;
+          document.getElementById('sum').innerHTML = sum + " IL";
+          document.getElementById('totalPro').innerHTML = totalPro;
+        }
+        if (guitarsID == 2) {
+          document.getElementById('gibsonCount').innerHTML = data;
+          count2 = Number(data);
+          sum += count2 * gibsonPrice;
+          totalPro += count2;
+          document.getElementById('sum').innerHTML = sum + " IL";
+          document.getElementById('totalPro').innerHTML = totalPro;
+        }
+        if (guitarsID == 3) {
+          document.getElementById('manuelCount').innerHTML = data;
+          count3 = Number(data);
+          sum += count3 * manuelPrice;
+          totalPro += count3;
+          document.getElementById('sum').innerHTML = sum + " IL";
+          document.getElementById('totalPro').innerHTML = totalPro;
+        }
+        if (guitarsID == 4) {
+          document.getElementById('martinCount').innerHTML = data;
+          count4 = Number(data);
+          sum += count4 * martinPrice;
+          totalPro += count4;
+          document.getElementById('sum').innerHTML = sum + " IL";
+          document.getElementById('totalPro').innerHTML = totalPro;
+        }
+      });
+  }
+
+  function clearCart(guitarsID) {
+    fetch('http://localhost:3000/clear/' + guitarsID)
+      .then(function (response) {
+        return response.text();
+      })
+      .then(function (data) {
+        if (guitarsID == 1) {
+          document.getElementById('fenderCount').innerHTML = data;
+          sum = 0;
+          totalPro = 0;
+          document.getElementById('sum').innerHTML = sum + " IL";
+          document.getElementById('totalPro').innerHTML = totalPro;
+        }
+        if (guitarsID == 2) {
+          document.getElementById('gibsonCount').innerHTML = data;
+          sum = 0;
+          totalPro = 0;
+          document.getElementById('sum').innerHTML = sum + " IL";
+          document.getElementById('totalPro').innerHTML = totalPro;
+        }
+        if (guitarsID == 3) {
+          document.getElementById('manuelCount').innerHTML = data;
+          sum = 0;
+          totalPro = 0;
+          document.getElementById('sum').innerHTML = sum + " IL";
+          document.getElementById('totalPro').innerHTML = totalPro;
+        }
+        if (guitarsID == 4) {
+          document.getElementById('martinCount').innerHTML = data;
+          sum = 0;
+          totalPro = 0;
+          document.getElementById('sum').innerHTML = sum + " IL";
+          document.getElementById('totalPro').innerHTML = totalPro;
+        }
+      });
+  }
+
+</script>

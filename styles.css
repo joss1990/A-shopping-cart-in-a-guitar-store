@@ -1,0 +1,80 @@
+ body {
+    /*background-color: rgb(138, 179, 192);*/
+    background-image: url("guitars/gg.jpg");
+    background-size:cover;
+    /*filter:blur(5px);*/
+
+    /* Container class for layout and styling */
+    div {
+       padding: 25px;
+       padding: auto;
+       /* Space around the content inside the container */
+       width: 49%;
+       /* Width of each container */
+       box-sizing: border-box;
+       /* Include padding in the element's total width */
+       display: inline-block;
+       /* Align containers in a row */
+       font-size: 25px;
+       /* Font size for text inside the container */
+       vertical-align: top;
+       /* Aligns the content to the top of the box */
+       text-align: center;
+    }
+
+    /* Adjust container width for smaller screens */
+    @media (max-width: 700px) {
+       div {
+          width: 100%;
+          /* Full width on screens smaller than 700px */
+       }
+    }
+
+    /* Styling for buttons */
+    button {
+       font-size: 25px;
+       /* Font size for button text */
+       padding: 10px;
+       /* Space inside the button */
+       border: 3px solid;
+       border-radius: 8px;
+       /* Border around the button */
+       margin-top: 20px;
+       /* Space above the button */
+       background-color:white;
+       /* No background color */
+       cursor: pointer;
+       /* Pointer cursor on hover */
+       box-shadow: 3px 3px 5px rgb(231, 148, 81);
+    }
+
+    /* Styling for images */
+    img {
+       width: 60%;
+       /* Full width of the container */
+       border: 3px solid;
+       border-radius: 8px;
+       /* Border around the image */
+       height: 400px;
+       box-shadow: 3px 3px 5px rgb(231, 148, 81);
+    }
+
+    h5 {
+       font-size: 80px;
+       color: rgb(150, 45, 6);
+       text-shadow: 5px 5px 5px rgb(200, 144, 106);
+    }
+
+    p {
+       color: rgb(238, 45, 11);
+       font-size: 35px;
+       text-align: center;
+    }
+
+    h1 {
+      color: coral;
+       font-size: 30px;
+       text-align: center;
+       text-shadow: 1px 1px 5px rgb(238, 112, 10);
+    }
+ }
